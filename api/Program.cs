@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer(); // helps explore API endpoints
 builder.Services.AddSwaggerGen(); // adds swagger 
 
 // Specify to the application which databse it's going to use. 
-builder.Services.AddDbContext<ApplicationDbContext>(options => // this parameter is a lambda expression or anonymous function
+builder.Services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options => // this parameter is a lambda expression or anonymous function
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
