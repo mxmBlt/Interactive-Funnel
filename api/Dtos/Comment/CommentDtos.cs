@@ -1,6 +1,6 @@
-namespace api.Models
+﻿namespace api.Dtos.Comment
 {
-    public class Comment
+    public class CommentDtos
     {
         public int Id { get; set; }
 
@@ -11,10 +11,5 @@ namespace api.Models
         public DateTime CreatedOn { get; set; } = DateTime.Now;
 
         public int? StockId { get; set; }
-        // navigation key allowing the comment to be linked to a stock
-
-        public Stock? Stock { get; set; }
-
-
     }
 }
