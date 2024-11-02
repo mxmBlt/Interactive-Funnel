@@ -20,6 +20,8 @@ builder.Services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(optio
 });
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
 
 // Build the application and get it ready to run
 var app = builder.Build();
