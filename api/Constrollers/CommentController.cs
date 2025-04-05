@@ -1,4 +1,4 @@
-﻿using api.Mappers;
+using api.Mappers;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +25,15 @@ namespace api.Constrollers
 
             return Ok(commentDto);
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CommentDtos>> GetById([FromRoute] int id)
+        {
+            var comment = await _commentRepository.GetByIdAsync(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment.ToCommentDto());
         }
     }
 }
