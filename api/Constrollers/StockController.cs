@@ -30,7 +30,6 @@ namespace api.Constrollers
         }
 
         [HttpGet("{id}")]
-        //public IActionResult GetOne(int id)
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var stock = await _stockRepo.GetByIdAsync(id);
