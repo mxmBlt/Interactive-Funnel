@@ -1,6 +1,9 @@
-﻿using api.Mappers;
+﻿using api.Dtos.Comment;
+using api.Mappers;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
+
+
 
 namespace api.Constrollers
 {
@@ -17,14 +20,23 @@ namespace api.Constrollers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
             var comments = await _commentRepository.GetAllAsync();
 
-            var commentDto = comments.Select(s => s.ToCommentDto());
+            var commentDtos = comments.Select(c => c.ToCommentDto()).ToList();
+            return commentDtos.Any() ? Ok(commentDtos) : NoContent();
+        }
 
-            return Ok(commentDto);
-
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CommentDtos>> GetById([FromRoute] int id)
+        {
+            var comment = await _commentRepository.GetByIdAsync(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment.ToCommentDto());
         }
     }
 }
